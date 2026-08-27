@@ -88,20 +88,46 @@ function ReviewDocuments() {
   }
 
   const handleFinalSubmit = () => {
-    // Temporary: replace with the final submission API when available.
-    console.log("Submitted Documents:", files);
+  const now = new Date();
 
-    const result = updateUserOnboarding("completed");
+  const application = {
+    id: `GST-${now.getFullYear()}-${Math.floor(
+      100000 + Math.random() * 900000
+    )}`,
 
-    if (!result.success) {
-      toast.error(result.message);
-      return;
-    }
+    type: "New GST Registration",
 
-    toast.success("GST filing application submitted successfully!");
+    submissionDate: now.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }),
 
-    navigate("/dashboard");
+    status: "Under Review",
+
+    lastUpdated: now.toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
   };
+
+  // Store application permanently in browser
+  localStorage.setItem(
+    "gstApplication",
+    JSON.stringify(application)
+  );
+
+  console.log("Submitted Documents:", files);
+  console.log("Application:", application);
+
+  toast.success("Documents submitted successfully!");
+
+  // Go to dashboard
+  navigate("/application-tracking");
+};
 
   return (
     <div className="min-h-screen bg-background px-4 py-8 sm:px-6 lg:px-8">

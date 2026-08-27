@@ -16,6 +16,7 @@ import Home from "../pages/Home";
 import Documents from "../pages/app/gst/Documents";
 import ReviewDocuments from "../pages/app/gst/Review";
 import GstRegistration from "../pages/app/gst/GstRegistration";
+import ApplicationTracking from "../pages/app/gst/ApplicationTrack";
 
 function AppRoutes() {
   return (
@@ -46,6 +47,7 @@ function AppRoutes() {
             <Route path="/documents" element={<Documents />} />
 
             <Route path="/review-documents" element={<ReviewDocuments />} />
+            <Route path="/application-tracking" element={<ApplicationTracking />} />
           </Route>
 
           {/* =========================

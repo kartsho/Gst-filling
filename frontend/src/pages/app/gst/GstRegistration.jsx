@@ -1,11 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useContext } from "react";
 
 import Input from "../../../components/ui/Input";
 import Button from "../../../components/ui/Button";
-import { AuthContext } from "../../../context/AuthContext";
 
 const CONSTITUTIONS = [
   "Proprietorship",
@@ -37,14 +35,7 @@ const REGISTRATION_REASONS = [
   "Business Expansion",
 ];
 
-function FormSelect({
-  label,
-  name,
-  options,
-  register,
-  error,
-  required = false,
-}) {
+function FormSelect({ label, name, options, register, error, required = false }) {
   return (
     <div>
       <label
@@ -67,7 +58,6 @@ function FormSelect({
         }`}
       >
         <option value="">Select {label}</option>
-
         {options.map((option) => (
           <option key={option} value={option}>
             {option}
@@ -81,7 +71,6 @@ function FormSelect({
 }
 
 function GstRegistration() {
-  const { updateUserOnboarding } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {
@@ -94,17 +83,7 @@ function GstRegistration() {
     // Temporary: replace with the GST registration API when available.
     console.log("GST registration details:", data);
 
-    // Mark GST onboarding as started only after
-    // the registration form has passed validation.
-    const result = updateUserOnboarding("in_progress");
-
-    if (!result.success) {
-      toast.error(result.message);
-      return;
-    }
-
     toast.success("Business details saved successfully.");
-
     navigate("/documents");
   };
 
@@ -155,10 +134,7 @@ function GstRegistration() {
               <Input
                 label={
                   <>
-                    PAN{" "}
-                    <span className="text-xs font-normal text-on-surface-variant">
-                      (ABCDE1234F)
-                    </span>
+                    PAN <span className="text-xs font-normal text-on-surface-variant">(ABCDE1234F)</span>
                   </>
                 }
                 name="pan"
