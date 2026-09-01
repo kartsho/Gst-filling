@@ -28,13 +28,30 @@ function Input({
     transition-colors
     disabled:cursor-not-allowed
     ${
-      error
-        ? "border-error focus:border-error"
-        : isLight
-          ? "border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-[#212C43]"
-          : "border-outline-variant bg-surface text-on-surface placeholder:text-on-surface-variant focus:border-primary"
+      isLight
+        ? `
+          bg-white
+          text-slate-900
+          placeholder:text-slate-400
+          disabled:bg-slate-100
+          ${
+            error
+              ? "border-error focus:border-error focus:ring-1 focus:ring-error/20"
+              : "border-slate-300 focus:border-[#212C43] focus:ring-1 focus:ring-[#212C43]/15"
+          }
+        `
+        : `
+          bg-surface
+          text-on-surface
+          placeholder:text-on-surface-variant
+          disabled:bg-surface-container
+          ${
+            error
+              ? "border-error focus:border-error focus:ring-1 focus:ring-error/20"
+              : "border-outline-variant focus:border-primary"
+          }
+        `
     }
-    ${isLight ? "disabled:bg-slate-100" : "disabled:bg-surface-container"}
   `;
 
   return (
